@@ -1,0 +1,116 @@
+
+a{
+    text-decoration: none;
+    color:black;
+}
+
+img{
+    height: 50px;
+    width:50px;
+}
+
+.home-img{
+    height: 175px;
+    width:  175px;
+    padding: 20px;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+footer{
+    margin-top: auto;
+}
+
+.grid-container{
+    display:inline-grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: auto 2fr;
+    column-gap: 75px;
+    row-gap: 50px;
+    padding: 15px;
+}
+
+.grid-item{
+    background-color: lightslategray;
+    border: 5px solid black;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.dateform{
+    grid-column: 1/ span 2;
+    grid-row: 1;
+    text-align: center;
+}
+
+.fixture-list{
+    grid-column: 1;
+    grid-row:2;
+    text-align:center;
+    height:fit-content;
+}
+
+.fixture{
+    border-bottom: 5px solid black;
+    padding: 10px;
+    margin: 10px;
+}
+
+.standings{
+    grid-column:2;
+    grid-row:2;
+}
+
+table{
+    background-color: lightslategray;
+}
+th, td {
+    padding: 15px;
+    text-align: left;
+  }
+
+
+.grid-containerMP{
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    padding: 20px;
+    gap: 10px;
+}
+
+.teams{
+    grid-column:1 / 4;
+    grid-row:1;
+    text-align: center;
+}
+
+.venue{
+    grid-column:1;
+    grid-row:2;
+}
+
+.standings-form{
+    grid-column: 2;
+    grid-row: 2;
+}
+
+.odds{
+    grid-column: 3;
+    grid-row:2;
+}
+
+
+.homeLineup{
+    grid-column:1;
+    grid-row:3;
+}
+
+.awayLineup{
+    grid-column: 3;
+    grid-row:3;
+}
+

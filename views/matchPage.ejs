@@ -1,0 +1,107 @@
+<%-include("partials/header.ejs")%>
+
+<div class="grid-containerMP">
+    <% if(locals.venue) { %>
+        <div class="grid-item teams">
+            <% if(venue.score.fulltime.home >=0){ %>
+                <h1><img src="<%=venue.teams.home.logo%>"/><%=venue.teams.home.name%> <%=venue.score.fulltime.home%> - <%=venue.score.fulltime.away%> <%=venue.teams.away.name%><img src="<%=venue.teams.away.logo%>"/></h1>
+            <%} else { %>
+                <h1><img src="<%=venue.teams.home.logo%>"/><%=venue.teams.home.name%> vs. <%=venue.teams.away.name%><img src="<%=venue.teams.away.logo%>"/></h1>
+            <%}%>
+        </div>
+        <div class="grid-item venue">
+            <h2>Referee: <%=venue.fixture.referee%></h2>
+            <h2>Stadium: <%=venue.fixture.venue.name%>, <%=venue.fixture.venue.city%>, <%=venue.league.country%> </h2>
+        </div>
+    <%} else { %>
+        Venue Information not available
+    <% } %>
+    
+    <div class="grid-item standings-form">
+        <h2>Standings:</h2>
+        <% if (locals.homeStandings) { %>
+            <h3><%=homeStandings.league.standings[0][0].rank %>: <%=homeStandings.league.standings[0][0].team.name%> <%=homeStandings.league.standings[0][0].all.win%> - <%=homeStandings.league.standings[0][0].all.draw%> - <%=homeStandings.league.standings[0][0].all.lose%> Pts: <%=homeStandings.league.standings[0][0].points%></h3>
+            <h3><%=awayStandings.league.standings[0][0].rank %>: <%=awayStandings.league.standings[0][0].team.name%> <%=awayStandings.league.standings[0][0].all.win%> - <%=awayStandings.league.standings[0][0].all.draw%> - <%=awayStandings.league.standings[0][0].all.lose%> Pts: <%=awayStandings.league.standings[0][0].points%></h3>
+        <%} else{ %>
+            <h2>No standings available</h2>
+        <% } %>
+
+        <hr/>
+    
+        <h2>Form (last 5) </h2>
+        <% if (locals.homeStandings) { %>
+                <h3><%=homeStandings.league.standings[0][0].team.name%>: <%=homeStandings.league.standings[0][0].form%></h3>
+                <h3><%=awayStandings.league.standings[0][0].team.name%>: <%=awayStandings.league.standings[0][0].form%></h3>
+        <%} else{ %>
+            <h3>Form not available</h3>
+        <% } %>
+    </div>
+    
+    <div class="grid-item odds">
+        <%if (locals.odds){ %>
+            <h2>Odds: Match Winner</h2>
+            <ul>
+                <li>Home: <%=odds.bookmakers[0].bets[0].values[0].odd %></li>
+                <li>Draw: <%=odds.bookmakers[0].bets[0].values[1].odd %></li>
+                <li>Away: <%=odds.bookmakers[0].bets[0].values[2].odd %></li>
+            </ul>
+            <small>Odds provided by <%=odds.bookmakers[0].name%></small>
+        <%} else { %>
+            <h1>No Odds available </h1>
+        <%}%>
+    </div>
+    
+    <div class="grid-item lineups homeLineup">
+        <% if (locals.homeLineup) { %>
+            <h2><%=homeLineup.team.name%> <%=homeLineup.formation%>  <img src="<%=homeLineup.team.logo%>"></h2>
+            <h2>Coach: <%=homeLineup.coach.name%> </h2>
+            <br>
+                <h3 style="text-align: center">Starting XI</h3>
+            <ul>
+                <% homeLineup.startXI.forEach(function(player){ %>
+                    <li><%=player.player.pos%> / <%=player.player.name%> / #<%=player.player.number%></li>
+                <%})%>
+            </ul>
+            <hr/>
+            <h3 style="text-align: center">Substitutes</h3>
+            <ul>
+                <% homeLineup.substitutes.forEach(function(player){ %>
+                    <li><%=player.player.pos%> / <%=player.player.name%> / #<%=player.player.number%></li>
+                <%})%>
+            </ul>
+        
+        <% } else{%>
+            <h3>Home Lineup Not available.</h3>
+        <%}%>
+    </div>
+    
+    
+    <div class="grid-item lineups awayLineup">
+        <% if (locals.awayLineup) { %>
+            <h2><%=awayLineup.team.name%> <%=awayLineup.formation%>  <img src="<%=awayLineup.team.logo%>"></h2>
+            <h2>Coach: <%=awayLineup.coach.name%> </h2>
+            <br>
+            <h3 style="text-align: center">Starting XI</h3>
+            <ul>
+                <% awayLineup.startXI.forEach(function(player){ %>
+                    <li><%=player.player.pos%> / <%=player.player.name%> / #<%=player.player.number%></li>
+                <%})%>
+            </ul> 
+            <hr/>
+            <h3 style="text-align: center">Substitutes</h3>
+            <ul>
+                <% homeLineup.substitutes.forEach(function(player){ %>
+                    <li><%=player.player.pos%> / <%=player.player.name%> / #<%=player.player.number%></li>
+                <%})%>
+            </ul>
+        <% } else{%>
+            <h3>Away Lineup Not available.</h3>
+        <%}%>
+    </div>
+
+</div>
+
+<%-include("partials/footer.ejs")%>
+
+
+

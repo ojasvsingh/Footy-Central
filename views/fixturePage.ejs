@@ -1,0 +1,77 @@
+<%-include("partials/header.ejs")%>
+
+
+<!-- <form action="/DateFixtures" method="post">
+    <label>Enter the Date for which fixtures you want to see.</label>
+    <input name="date" type="text" placeholder="Date: YYYY-MM-DD"/>
+    <input type="submit" value="Search"/>
+</form> -->
+
+<div class="grid-container">
+    <div class="grid-item dateform">
+        <%let currentDate = new Date().toJSON().slice(0, 10);%>
+        <form action="/DateFixtures" method="post">
+            <label>Select a date to view its Fixtures: 
+                <input type="date" name="date"/>
+                <input type="submit" value="Select" />
+            </label>
+        </form>
+        <% if (locals.specifiedDate) { %>
+            <h1>Showing fixtures for <%=specifiedDate%></h1>
+        <%} else{%>
+            <h1>Showing fixtures for <%=currentDate%></h1>
+            <% } %>
+    </div>
+    
+    <div class="grid-item fixture-list">
+        <% if(locals.fixtures[0]) { %>
+            <% fixtures.forEach(function(fixture){ %>
+                <div class="fixture">
+                    <%if (fixture.score.fulltime.home >=0){ %>
+                        <h2> <a href="/matchDetails/<%=fixture.fixture.id%>/<%=fixture.teams.home.id%>/<%=fixture.teams.away.id%>"><img src="<%=fixture.teams.home.logo%>"/> <%=fixture.teams.home.name%> <%=fixture.score.fulltime.home%> - <%=fixture.score.fulltime.away%></fixture.score.fulltime.away> <%=fixture.teams.away.name%> <img src="<%=fixture.teams.away.logo%>"/></a> (<%=fixture.fixture.status.short%>) </h2>
+                    <%} else{ %>
+                        <h2> <a href="/matchDetails/<%=fixture.fixture.id%>/<%=fixture.teams.home.id%>/<%=fixture.teams.away.id%>"><img src="<%=fixture.teams.home.logo%>"/> <%=fixture.teams.home.name%> vs <%=fixture.teams.away.name%> <img src="<%=fixture.teams.away.logo%>"/></a> </h2>
+                    <%} %>
+                </div>
+           <% }) %>
+        <% } else{ %>
+            <h2>No fixtures on this day.</h2>
+        <%}%>
+    </div>
+    
+    <div class="grid-item standings">
+        <% if(locals.standings){ %>
+            <h2><%=standings.league.name%> <img src="<%=standings.league.logo%>"/>(Rnk/Name/W/D/L/P)</h2>
+            <%const standingsArr = standings.league.standings%>
+            <table class="table table-striped bg-body-secondary">
+                <thead>
+                    <tr>
+                        <th scope="col">Standing</th>
+                        <th scope="col">Team</th>
+                        <th scope="col">Win</th>
+                        <th scope="col">Draw</th>
+                        <th scope="col">Loss</th>
+                        <th scope="col">Points</th>
+                    </tr>
+                    <tbody>
+                        <%standingsArr[0].forEach(function(team){ %>
+                        <tr>
+                            <th scope="row"><%=team.rank%></th>
+                            <td><%=team.team.name%></td>
+                            <td><%=team.all.win%></td>
+                            <td><%=team.all.draw%></td>
+                            <td><%=team.all.lose%></td>
+                            <td><%=team.points%></td>
+                        </tr>
+                        <%})%>
+                    </tbody>
+                </thead>
+            </table>
+        <%} else { %>
+            <h3>Standings not available</h3>
+        <%}%>
+    </div>
+
+</div>
+
+<%-include("partials/footer.ejs")%>

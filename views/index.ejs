@@ -1,0 +1,24 @@
+<%-include("partials/header.ejs")%>
+
+<%let currentDate = new Date().toJSON().slice(0, 10)%>
+<div class="my-5">
+    <div class="p-5 text-center bg-body-tertiary">
+      <div class="container py-5">
+        <h1 class="text-body-emphasis">Footy Central</h1>
+        <p class="col-lg-8 mx-auto lead">
+          See upcoming and previous fixtures for your favorite football leagues!
+        </p>
+        <div class="league-images">
+            <a href="/LeagueFixtures/39/<%=currentDate%>"><img class="home-img"  src="./images/EnglishPremierLeague.webp" alt="epl logo"/></a>
+            <a href="/LeagueFixtures/140/<%=currentDate%>"><img class="home-img" src="./images/laliga.webp" alt="laliga logo"/></a>
+            <a href="/LeagueFixtures/135/<%=currentDate%>"><img class="home-img" src="./images/serieA.png" alt="seriea logo"/></a>
+            <a href="/LeagueFixtures/2/<%=currentDate%>"><img class="home-img" src="./images/championsleague.png" alt="chapmionsleauge logo"/></a>
+            <a href="/LeagueFixtures/3/<%=currentDate%>"><img class="home-img" src="./images/europaleague.png" alt="europaleague logo"/></a>
+            <a href="/LeagueFixtures/253/<%=currentDate%>"><img class="home-img" src="./images/mls-logo.webp" alt="mls logo"/></a>
+            <a href="/LeagueFixtures/307/<%=currentDate%>"><img class="home-img" src="./images/saudileague.webp" alt="saudileaguelogo"/></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%-include("partials/footer.ejs")%>
